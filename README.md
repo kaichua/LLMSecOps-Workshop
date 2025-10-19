@@ -1,5 +1,14 @@
 # LLMSecOps-Workshop
 
+## Overall
+The project is managed using the uv python virtual environment.
+
+To start, run the command: `uv sync` to install the neccessary libraries.
+
+To execute commands in the virtual environment, see below:
+- To run pip: `uv run pip freeze > requirements.txt`.
+- To run python files: `uv run main.py`.
+
 ## Docker
 ### Building Docker Image
 Ensure that the terminal is in the same location as your ``Dockerfile``
