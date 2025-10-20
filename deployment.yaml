@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpt-huggingface
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: gpt-hf-prod
+  template:
+    metadata:
+      labels:
+        app: gpt-hf-prod
+    spec:
+      containers:
+      - name: gptcontainer
+        image: wenkai/fastapi-app'
+        ports:
+        - containerPort: 4000
