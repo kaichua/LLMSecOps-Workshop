@@ -53,7 +53,7 @@ docker pull aquasec/trivy
 
 # Removes session after running and mount the local image repository so that the trivy docker can scan
 # Additionally, set a higher timeout and enable vuln for faster execution
-docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --timeout 15m --scanners vuln --severity HIGH,CRITICAL wenkai/fastapi-app
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --timeout 15m --scanners vuln --severity HIGH,CRITICAL kaichua95/fastapi-app
 ```
 
 ### Results
@@ -213,7 +213,7 @@ spec:
     spec:
       containers:
       - name: gptcontainer
-        image: wenkai/fastapi-app'
+        image: kaichua95/fastapi-app'
         ports:
         - containerPort: 4000
 ---
