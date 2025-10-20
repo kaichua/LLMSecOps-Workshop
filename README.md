@@ -83,7 +83,41 @@ Total: 6 (HIGH: 6, CRITICAL: 0)
 
 ## Digital Ocean
 ### Installing (Windows)
-Open Powershell and run the following:
+To install ``doctl`` from digital ocean, open Powershell with administrator and run:
 ```
-Invoke-WebRequest https://github.com/digitalocean/doctl/releases/download/v1.141.0/doctl-1.141.0-windows-amd64.zip -OutFile ~\doctl-1.141.0-windows-amd64.zip
+Invoke-WebRequest https://github.com/digitalocean/doctl/releases/download/v1.145.0/doctl-1.145.0-windows-amd64.zip -OutFile ~\doctl-1.145.0-windows-amd64.zip
 ```
+The zip file should be downloaded to your home folder located at "C:\Users\Wen Kai Chua\" for example.
+
+Once the zip file has been downloaded, perform the following steps:
+```
+New-Item -ItemType Directory $env:ProgramFiles\doctl\
+
+Expand-Archive -Path ~/doctl-1.145.0-windows-amd64.zip -DestinationPath $env:ProgramFiles\doctl\
+
+[Environment]::SetEnvironmentVariable(
+    "Path",
+    [Environment]::GetEnvironmentVariable("Path",
+    [EnvironmentVariableTarget]::Machine) + ";$env:ProgramFiles\doctl\",
+    [EnvironmentVariableTarget]::Machine)
+
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")
+```
+
+### Initializing Kubernetes Cluster
+Need to create an access token via https://cloud.digitalocean.com/account/api/tokens and enter the token using ``doctl auth init``.
+
+Run the next command to spin up kubernetes instances.
+```
+doctl kubernetes cluster create my-cluster --region nyc1 --version 1.33.1-do.2 --node-pool "name=default;size=s-2vcpu-4gb;count=2"
+
+doctl kubernetes cluster kubeconfig save my-cluster
+
+kubectl get nodes
+```
+
+## Helm
+### Installing (Windows)
+1. Download the zip file from ``https://get.helm.sh/helm-v3.19.0-windows-amd64.zip``
+2. Extract the zip file into ``"C:\Program Files\helm\"``.
+3. In environment variables, add the ``"C:\Program Files\helm\"`` to the path variable.
